@@ -102,14 +102,14 @@ class RedBlackTree():
                     value_x = self.root
         value_x.color = 0
 
-    def rb_transplant(self, uncle, v):
+    def rb_transplant(self, uncle, value):
         if uncle.parent == None:
-            self.root = v
+            self.root = value
         elif uncle == uncle.parent.left:
-            uncle.parent.left = v
+            uncle.parent.left = value
         else:
-            uncle.parent.right = v
-        v.parent = uncle.parent
+            uncle.parent.right = value
+        value.parent = uncle.parent
 
     def del_nh(self, node, key):
         # find the node containing key
@@ -153,39 +153,39 @@ class RedBlackTree():
         if y_original_color == 0:
             self.fix_delete(value_x)
     
-    def  fix_insert(self, k):
-        while k.parent.color == 1:
-            if k.parent == k.parent.parent.right:
-                uncle = k.parent.parent.left # uncle
+    def  fix_insert(self, node):
+        while node.parent.color == 1:
+            if node.parent == node.parent.parent.right:
+                uncle = node.parent.parent.left # uncle
                 if uncle.color == 1:
                     # case 3.1
                     uncle.color = 0
-                    k.parent.color = 0
-                    k.parent.parent.color = 1
-                    k = k.parent.parent
+                    node.parent.color = 0
+                    node.parent.parent.color = 1
+                    node = node.parent.parent
                 else:
-                    if k == k.parent.left:
-                        k = k.parent
-                        self.rotate_right(k)
-                    k.parent.color = 0
-                    k.parent.parent.color = 1
-                    self.rotate_left(k.parent.parent)
+                    if node == node.parent.left:
+                        node = node.parent
+                        self.rotate_right(node)
+                    node.parent.color = 0
+                    node.parent.parent.color = 1
+                    self.rotate_left(node.parent.parent)
             else:
-                uncle = k.parent.parent.right
+                uncle = node.parent.parent.right
 
                 if uncle.color == 1:
                     uncle.color = 0
-                    k.parent.color = 0
-                    k.parent.parent.color = 1
-                    k = k.parent.parent 
+                    node.parent.color = 0
+                    node.parent.parent.color = 1
+                    node = node.parent.parent 
                 else:
-                    if k == k.parent.right:
-                        k = k.parent
-                        self.rotate_left(k)
-                    k.parent.color = 0
-                    k.parent.parent.color = 1
-                    self.rotate_right(k.parent.parent)
-            if k == self.root:
+                    if node == node.parent.right:
+                        node = node.parent
+                        self.rotate_left(node)
+                    node.parent.color = 0
+                    node.parent.parent.color = 1
+                    self.rotate_right(node.parent.parent)
+            if node == self.root:
                 break
         self.root.color = 0
 
@@ -213,8 +213,8 @@ class RedBlackTree():
     def postorder(self):
         self.post_order_helper(self.root)
 
-    def searchTree(self, k):
-        return self.search_tree_helper(self.root, k)
+    def searchTree(self, node):
+        return self.search_tree_helper(self.root, node)
 
     def minimum(self, node):
         while node.left != self.NULL:
