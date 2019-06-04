@@ -1,6 +1,4 @@
 import sys
-import networkx as nx
-import matplotlib.pyplot as plt
 import random
 
 
@@ -333,10 +331,10 @@ if __name__ == "__main__":
     print("|  _ <| |_) || || | |  __/  __/")
     print("|_| \_\____/ |_||_|  \___|\___|\n\n")
     
-    print("Do you want to choose the added values or randomize then? ")
+    print("Do you want to do it manually or automatic? ")
     option = input()
 
-    if option == "choose":
+    if option == "manual":
         n = int(input("Enter the size of your Tree: "))
 
         for i in range(n):
